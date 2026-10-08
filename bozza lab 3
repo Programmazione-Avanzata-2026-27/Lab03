@@ -5,24 +5,28 @@ class Strumento:
         self.marca = marca
         self.anno_acquisto = int(anno_acquisto)
         self.valore = float(valore)
-    def __str__(self):
-        return  f"[{self.codice}] {self.tipo} {self.marca} - {self.anno_acquisto} ({self.valore} euro)"
-            
+        def __str__(self):
+            return  f"[{self.codice}] {self.tipo} {self.marca} - {self.anno_acquisto} ({self.valore} euro)"
+
+
++
 class Prestito:
     def __init__(self, codiceprestito, data, codicestrumento, cognomeprestito):
         self.codiceprestito = codiceprestito
-        self.dataprestito = data
+        self.dataprestito = dataprestito
         self.codicestrumento = codicestrumento
         self.cognomeprestito = cognomeprestito
     def __str__(self):
-        return f"Prestito {self.codiceprestito} - Strumento {self.codicestrumento} all'allievo {self.cognomeprestito} in data {self.dataprestito}"
-        
+        return f"Prestito{self.codiceprestito} - Strumento {self.codicestrumento} all'allievo {self.cognomeprestito} in data {self.dataprestito}"
+
+
 class DepositoStrumenti:
     def __init__(self, nome, responsabile):
         self.nome = nome
         self.responsabile = responsabile
         self.listastrumenti = []
         self.listaprestiti = []
+
 
     def carica_file_strumenti(self, file_path):
         try:
@@ -42,6 +46,7 @@ class DepositoStrumenti:
         except FileNotFoundError:
             raise  FileNotFoundError(f"File {file_path} not found")
 
+
     def aggiungi_strumento(self, tipo, marca, anno_acquisto, valore):
         if len(self.listastrumenti) == 0:
             nuovonumero = 1
@@ -56,6 +61,7 @@ class DepositoStrumenti:
     def strumenti_ordinati_per_marca(self):
         listaordinata = sorted(self.listastrumenti, key=lambda x: x.marca)
         return listaordinata
+
 
     def nuovo_prestito(self, data, id_strumento, cognome_allievo):
         esiste = False
@@ -75,11 +81,4 @@ class DepositoStrumenti:
         return nuovoprestito
 
     def termina_prestito(self, id_prestito):
-        dacancellare = None
-        for prestito in self.listaprestiti:
-            if prestito.codiceprestito == id_prestito:
-                dacancellare = prestito
-        if dacancellare == None:
-            raise Exception("Errore: impossibile trovare questo codice prestito.")
-        self.listaprestiti.remove(dacancellare)
-
+        
