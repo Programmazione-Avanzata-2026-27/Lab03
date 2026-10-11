@@ -1,5 +1,7 @@
 from deposito_strumenti import DepositoStrumenti
 from datetime import datetime
+from operator import attrgetter
+import csv
 
 def menu():
     print("\n--- MENU DEPOSITO STRUMENTI ---")
@@ -54,7 +56,8 @@ def main():
             data = datetime.now().date()
             try:
                 prestito = deposito.nuovo_prestito(data, id_strumento, cognome_allievo)
-                print(f"Prestito andato a buon fine: {prestito}")
+                #Ho aggiunto separatamente nel print id_strumento
+                print(f"Prestito andato a buon fine: {id_strumento},{prestito}")
             except Exception as e:
                 print(e)
 
